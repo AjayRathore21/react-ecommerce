@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchAllProducts,fetchProductByFilters } from "./productListApi";
+import { fetchAllProducts, fetchProductByFilters } from "./productListApi";
 
 const initialState = {
   products: [],
@@ -18,10 +18,8 @@ export const fetchAllProductsAsync = createAsyncThunk(
 
 export const fetchProductByFiltersAsync = createAsyncThunk(
   "product/fetchProductByFilters",
-  async (filter) => {
-    const response = await fetchProductByFilters(filter);
-
-    // console.log('inside thunk',response)
+async ({filter, sort}) => {           // agr 2 agr send krni h to obj bnaa k send krna remamber
+    const response = await fetchProductByFilters(filter,sort);
 
     // The value we return becomes the `fulfilled` action payload
     return response.data;

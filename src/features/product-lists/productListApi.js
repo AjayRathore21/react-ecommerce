@@ -10,17 +10,30 @@ export function fetchAllProducts() {
   );
 }
 
-export function fetchProductByFilters(filter) {
-  // filter object--> {'category':'smartphone'}
+export function fetchProductByFilters(filter, sort) {
+  // filter object--> {'category':['smartphone','laptops']}
+  // sort-->{_sort:'price',_order:'desc'}
 
   //TODO--> multiple category filter should implement
 
   let queryString = "";
   for (let key in filter) {
-    queryString += `${key}=${filter[key]}&`; // query me space nahi hona chahiye!!
+    const categoryValues = filter[key];
+
+    if (categoryValues.length) {
+      const lastCategoryValue = categoryValues[categoryValues.length - 1];
+      queryString += `${key}=${lastCategoryValue}&`;
+    }
+    // query me space nahi hona chahiye!!
   }
 
-  console.log("api-->", queryString);
+  // console.log(queryString,'checking for filter')
+
+  for (let key in sort) {
+    queryString += `${key}=${sort[key]}&`;
+  }
+
+  // console.log(queryString,'checking for sort')
 
   return new Promise(async (resolve) =>
     // TODO will write server url after some time
