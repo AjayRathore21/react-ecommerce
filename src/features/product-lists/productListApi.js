@@ -10,9 +10,10 @@ export function fetchAllProducts() {
   );
 }
 
-export function fetchProductByFilters(filter, sort) {
+export function fetchProductByFilters(filter, sort, pagination) {
   // filter object--> {'category':['smartphone','laptops']}
   // sort-->{_sort:'price',_order:'desc'}
+  // pagination = {_sort:1,_limit=10}
 
   //TODO--> multiple category filter should implement
 
@@ -33,6 +34,10 @@ export function fetchProductByFilters(filter, sort) {
     queryString += `${key}=${sort[key]}&`;
   }
 
+  for (let key in pagination) {
+    queryString += `${key}=${pagination[key]}&`;
+  }
+
   // console.log(queryString,'checking for sort')
 
   return new Promise(async (resolve) =>
@@ -42,7 +47,9 @@ export function fetchProductByFilters(filter, sort) {
 
       const data = await res.json();
 
-      resolve({ data });
+      const totalItems = await res.headers.get('X-Total-Count')
+
+      resolve({ data:{products:data,totalItems:+totalItems} });
     }
   );
 }
