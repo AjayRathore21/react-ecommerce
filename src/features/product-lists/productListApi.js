@@ -53,3 +53,26 @@ export function fetchProductByFilters(filter, sort, pagination) {
     }
   );
 }
+
+
+export function fetchCatories() {
+  return new Promise(async (resolve) =>
+    // TODO will write server url after some time
+    {
+      const res = await fetch("http://localhost:8080/categories");
+      const data = await res.json();
+      resolve({ data });
+    }
+  );
+}
+
+export function fetchBrands() {
+  return new Promise(async (resolve) =>
+    // TODO will write server url after some time
+    {
+      const res = await fetch("http://localhost:8080/brands");
+      const data = await res.json();
+      resolve({ data });
+    }
+  );
+}
