@@ -10,6 +10,18 @@ export function fetchAllProducts() {
   );
 }
 
+export function fetchProductById(id) {
+  return new Promise(async (resolve) =>
+    // TODO will write server url after some time
+    {
+      const res = await fetch("http://localhost:8080/products/"+id);
+      const data = await res.json();
+      resolve({ data });
+    }
+  );
+}
+
+
 export function fetchProductByFilters(filter, sort, pagination) {
   // filter object--> {'category':['smartphone','laptops']}
   // sort-->{_sort:'price',_order:'desc'}
