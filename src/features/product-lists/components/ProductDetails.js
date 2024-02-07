@@ -28,6 +28,9 @@ import {
   selectProductById,
 } from "../productListSlice";
 import { useParams } from "react-router-dom";
+import { selectLoggedInUser } from "../../auth/AuthSlice";
+import { addToCart } from "../../cart/cartApi";
+import { addToCartAsync } from "../../cart/cartSlice";
 
 const colors = [
   { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
@@ -53,74 +56,28 @@ const highlights  = [
 ]
 
 
-// const product = {
-//   name: "Basic Tee 6-Pack",
-//   price: "$192",
-//   href: "#",
-//   breadcrumbs: [
-//     { id: 1, name: "Men", href: "#" },
-//     { id: 2, name: "Clothing", href: "#" },
-//   ],
-//   images: [
-//     {
-//       src: "https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg",
-//       alt: "Two each of gray, white, and black shirts laying flat.",
-//     },
-//     {
-//       src: "https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg",
-//       alt: "Model wearing plain black basic tee.",
-//     },
-//     {
-//       src: "https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg",
-//       alt: "Model wearing plain gray basic tee.",
-//     },
-//     {
-//       src: "https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg",
-//       alt: "Model wearing plain white basic tee.",
-//     },
-//   ],
-//   colors: [
-//     { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
-//     { name: "Gray", class: "bg-gray-200", selectedClass: "ring-gray-400" },
-//     { name: "Black", class: "bg-gray-900", selectedClass: "ring-gray-900" },
-//   ],
-//   sizes: [
-//     { name: "XXS", inStock: false },
-//     { name: "XS", inStock: true },
-//     { name: "S", inStock: true },
-//     { name: "M", inStock: true },
-//     { name: "L", inStock: true },
-//     { name: "XL", inStock: true },
-//     { name: "2XL", inStock: true },
-//     { name: "3XL", inStock: true },
-//   ],
-//   description:
-//     'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
-//   highlights: [
-//     "Hand cut and sewn locally",
-//     "Dyed with our proprietary colors",
-//     "Pre-washed & pre-shrunk",
-//     "Ultra-soft 100% cotton",
-//   ],
-//   details:
-//     'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-// };
-// const reviews = { href: "#", average: 4, totalCount: 117 };
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+// TODO : Loading UI
 export default function ProductDetail() {
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [selectedSize, setSelectedSize] = useState(sizes[2]);
   const product = useSelector(selectProductById);
   const dispatch = useDispatch();
+  const user = useSelector(selectLoggedInUser)
   const params = useParams();
   // TODO : in server data. we will add colors, size, highlights.
   useEffect(() => {
     dispatch(fetchAllProductByIdAsync(params.id));
   }, [dispatch, params.id]);
+
+const handleCart = (e)=>{
+  e.preventDefault();
+  dispatch(addToCartAsync({...product,quantity:1,user:user.id}))
+}
 
   return (
     <div className="bg-white">
@@ -363,9 +320,10 @@ export default function ProductDetail() {
 
                 <button
                   type="submit"
+                  onClick={e=>handleCart(e)}
                   className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
-                  Add to bag
+                  Add to Cart
                 </button>
               </form>
             </div>
