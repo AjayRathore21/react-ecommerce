@@ -26,17 +26,16 @@ export const counterSlice = createSlice({
     decrement: (state) => {
       state.value -= 1;
     },
-
-    extraReducers: (builder) => {
-      builder
-        .addCase(incrementAsync.pending, (state) => {
-          state.status = "loading";
-        })
-        .addCase(incrementAsync.fulfilled, (state, action) => {
-          state.status = "idle";
-          state.value += action.payload;
-        });
-    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(incrementAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(incrementAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.value += action.payload;
+      });
   },
 });
 

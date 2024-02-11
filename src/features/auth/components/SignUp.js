@@ -1,7 +1,7 @@
-import { Link,Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { selectLoggedInUser,createUserAsync } from "../AuthSlice";
-import { useSelector,useDispatch } from "react-redux";
+import { selectLoggedInUser, createUserAsync } from "../AuthSlice";
+import { useSelector, useDispatch } from "react-redux";
 export default function SignUP() {
   const {
     register,
@@ -11,7 +11,7 @@ export default function SignUP() {
   const dispatch = useDispatch();
   const user = useSelector(selectLoggedInUser);
 
-  console.log(user,'inside signup!')
+  console.log(user, "inside signup!");
   return (
     <>
       {/*
@@ -22,7 +22,7 @@ export default function SignUP() {
             <body class="h-full">
             ```
           */}
-          {user && <Navigate to='/login'></Navigate> }
+      {user && <Navigate to="/login"></Navigate>}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -34,7 +34,6 @@ export default function SignUP() {
             Create a new Account
           </h2>
         </div>
-
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form
             noValidate
@@ -42,8 +41,14 @@ export default function SignUP() {
             onSubmit={handleSubmit((data, e) => {
               e.preventDefault();
               console.log(data);
-              dispatch(createUserAsync({email:data.email,password:data.password}))
-             
+              dispatch(
+                createUserAsync({
+                  email: data.email,
+                  password: data.password,
+                  addresses: [],
+                })
+              );
+
               // console.log(errors);
             })}
           >
@@ -126,7 +131,7 @@ export default function SignUP() {
                   {...register("confirmPassword", {
                     required: "please confirmPassword!!",
                     validate: (value, formValues) =>
-                      value == formValues.password ||
+                      value === formValues.password ||
                       "password is not matching!!",
                   })}
                   type="password"

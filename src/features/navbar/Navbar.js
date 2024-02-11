@@ -23,8 +23,8 @@ const navigation = [
   { name: "Reports", href: "#", current: false },
 ];
 const userNavigation = [
-  { name: "Your Profile", link: "#" },
-  { name: "Settings", href: "#" },
+  { name: "My Profile", link: "/profile" },
+  { name: "My Orders", link: "/orders" },
   { name: "Sign out", link: "/login" },
 ];
 
@@ -34,7 +34,7 @@ function classNames(...classes) {
 
 export default function Navbar({ children }) {
   const items = useSelector(selectItems);
-  console.log(items.length,'inside navbar!!');
+  console.log(items.length, "inside navbar!!");
   return (
     <>
       {/*
@@ -95,9 +95,11 @@ export default function Navbar({ children }) {
                         </button>
                       </Link>
 
-                     {items.length>0 && <span className="inline-flex items-center rounded-md mb-5    bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20">
-                        {items.length}
-                      </span>}
+                      {items.length > 0 && (
+                        <span className="inline-flex items-center rounded-md mb-5    bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20">
+                          {items.length}
+                        </span>
+                      )}
 
                       {/* Profile dropdown */}
                       <Menu as="div" className="relative ml-3">
@@ -213,9 +215,11 @@ export default function Navbar({ children }) {
                         />
                       </button>
                     </Link>
-                    {items.length>0 && <span className="inline-flex items-center rounded-md mb-5    bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20">
+                    {items.length > 0 && (
+                      <span className="inline-flex items-center rounded-md mb-5    bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20">
                         {items.length}
-                      </span>}
+                      </span>
+                    )}
                   </div>
                   <div className="mt-3 space-y-1 px-2">
                     {userNavigation.map((item) => (
@@ -225,7 +229,17 @@ export default function Navbar({ children }) {
                         href={item.href}
                         className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                       >
-                        {item.name}
+                        {({ active }) => (
+                          <Link
+                            to={item.link}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700"
+                            )}
+                          >
+                            {item.name}
+                          </Link>
+                        )}
                       </Disclosure.Button>
                     ))}
                   </div>
@@ -237,9 +251,12 @@ export default function Navbar({ children }) {
 
         <header className="bg-white shadow">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+            <Link
+              to={"/"}
+              className="text-3xl font-bold tracking-tight text-gray-900"
+            >
               BhartBazaar
-            </h1>
+            </Link>
           </div>
         </header>
         <main>

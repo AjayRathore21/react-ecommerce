@@ -2,7 +2,7 @@ import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Bloodtype } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteFromCartAsync, selectItems, updateCartAsync } from "./cartSlice";
 
@@ -25,7 +25,9 @@ export default function Cart() {
   };
 
   return (
+
     <>
+      {!items.length && <Navigate to='/' replace={true}></Navigate>}
       <div className="mx-auto bg-white pb-12 mt-12 max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mt-8 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl my-12 text-center font-bold tracking-tight text-gray-900">
@@ -58,10 +60,12 @@ export default function Cart() {
                     <div className="flex flex-1 items-end justify-between text-sm">
                       <div className="text-gray-500">
                         <bold className="mr-2 font-bold">Qty</bold>{" "}
-                        <select onChange={(e) => handleQuantity(e, product.id)} value={product.quantity}>
+                        <select onChange={(e) => handleQuantity(e, product)} value={product.quantity}>
                           <option id="1">1</option>
                           <option id="2">2</option>
                           <option id="3">3</option>
+                          <option id="2">4</option>
+                          <option id="3">5</option>
                         </select>
                       </div>
 

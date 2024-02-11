@@ -2013,7 +2013,52 @@
     {
       "email": "contact@programmx.in",
       "password": "Ajay@1234",
-      "id": 12
+      "id": 12,
+      "addresses": [
+        {
+          "name": "Ajay",
+          "email": "ajaykumar420.ak79@gmail.com",
+          "phone": "09992664018",
+          "street": "Vill. Garhi bala, near bindhroli",
+          "city": "Sonipat",
+          "state": "Haryana",
+          "pinCode": "131403"
+        },
+        {
+          "name": "Ajay",
+          "email": "ajaykumar420.ak79@gmail.com",
+          "phone": "09992664018",
+          "street": "Vill. Garhi bala, near bindhroli",
+          "city": "Sonipat",
+          "state": "Haryana",
+          "pinCode": "131403"
+        },
+        {
+          "name": "Ajay",
+          "email": "ajaykumar420.ak79@gmail.com",
+          "phone": "09992664018",
+          "street": "Vill. Garhi bala, near bindhroli",
+          "city": "Sonipat",
+          "state": "Haryana",
+          "pinCode": "131403"
+        }
+      ]
+    },
+    {
+      "email": "abhinav@abhinav.com",
+      "password": "Ajay@1234",
+      "addresses": [
+        {
+          "name": "Ajay",
+          "email": "ajaykumar420.ak79@gmail.com",
+          "phone": "09992664018",
+          "street": "Vill. Garhi bala, near bindhroli",
+          "city": "Sonipat",
+          "state": "Haryana",
+          "pinCode": "131403"
+        }
+      ],
+      "id": 13
     }
   ],
   "cart": [
@@ -2057,47 +2102,244 @@
       ],
       "quantity": 1,
       "user": 1
+    }
+  ],
+  "orders": [
+    {
+      "items": [
+        {
+          "title": "Samsung Galaxy Book",
+          "description": "Samsung Galaxy Book S (2020) Laptop With Intel Lakefield Chip, 8GB of RAM Launched",
+          "price": 1499,
+          "discountPercentage": 4.15,
+          "rating": 4.25,
+          "stock": 50,
+          "brand": "Samsung",
+          "category": "laptops",
+          "thumbnail": "https://i.dummyjson.com/data/products/7/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/7/1.jpg",
+            "https://i.dummyjson.com/data/products/7/2.jpg",
+            "https://i.dummyjson.com/data/products/7/3.jpg",
+            "https://i.dummyjson.com/data/products/7/thumbnail.jpg"
+          ],
+          "quantity": 2,
+          "user": 13,
+          "id": 3
+        }
+      ],
+      "totalAmount": 2998,
+      "totalItems": 2,
+      "user": {
+        "email": "abhinav@abhinav.com",
+        "password": "Ajay@1234",
+        "addresses": [
+          {
+            "name": "Ajay",
+            "email": "ajaykumar420.ak79@gmail.com",
+            "phone": "09992664018",
+            "street": "Vill. Garhi bala, near bindhroli",
+            "city": "Sonipat",
+            "state": "Haryana",
+            "pinCode": "131403"
+          }
+        ],
+        "id": 13
+      },
+      "PaymentMethod": "cash",
+      "selectedAddress": {
+        "name": "Ajay",
+        "email": "ajaykumar420.ak79@gmail.com",
+        "phone": "09992664018",
+        "street": "Vill. Garhi bala, near bindhroli",
+        "city": "Sonipat",
+        "state": "Haryana",
+        "pinCode": "131403"
+      },
+      "status": "pending",
+      "id": 1
     },
     {
-      "id": 6,
-      "title": "MacBook Pro",
-      "description": "MacBook Pro 2021 with mini-LED display may launch between September, November",
-      "price": 1749,
-      "discountPercentage": 11.02,
-      "rating": 4.57,
-      "stock": 83,
-      "brand": "Apple",
-      "category": "laptops",
-      "thumbnail": "https://i.dummyjson.com/data/products/6/thumbnail.png",
-      "images": [
-        "https://i.dummyjson.com/data/products/6/1.png",
-        "https://i.dummyjson.com/data/products/6/2.jpg",
-        "https://i.dummyjson.com/data/products/6/3.png",
-        "https://i.dummyjson.com/data/products/6/4.jpg"
+      "items": [
+        {
+          "title": "MacBook Pro",
+          "description": "MacBook Pro 2021 with mini-LED display may launch between September, November",
+          "price": 1749,
+          "discountPercentage": 11.02,
+          "rating": 4.57,
+          "stock": 83,
+          "brand": "Apple",
+          "category": "laptops",
+          "thumbnail": "https://i.dummyjson.com/data/products/6/thumbnail.png",
+          "images": [
+            "https://i.dummyjson.com/data/products/6/1.png",
+            "https://i.dummyjson.com/data/products/6/2.jpg",
+            "https://i.dummyjson.com/data/products/6/3.png",
+            "https://i.dummyjson.com/data/products/6/4.jpg"
+          ],
+          "quantity": 1,
+          "user": 13,
+          "id": 3
+        }
       ],
-      "quantity": 2,
-      "user": 12
+      "totalAmount": 1749,
+      "totalItems": 1,
+      "user": {
+        "email": "abhinav@abhinav.com",
+        "password": "Ajay@1234",
+        "addresses": [
+          {
+            "name": "Ajay",
+            "email": "ajaykumar420.ak79@gmail.com",
+            "phone": "09992664018",
+            "street": "Vill. Garhi bala, near bindhroli",
+            "city": "Sonipat",
+            "state": "Haryana",
+            "pinCode": "131403"
+          }
+        ],
+        "id": 13
+      },
+      "PaymentMethod": "cash",
+      "selectedAddress": {
+        "name": "Ajay",
+        "email": "ajaykumar420.ak79@gmail.com",
+        "phone": "09992664018",
+        "street": "Vill. Garhi bala, near bindhroli",
+        "city": "Sonipat",
+        "state": "Haryana",
+        "pinCode": "131403"
+      },
+      "status": "pending",
+      "id": 2
     },
     {
-      "id": 9,
-      "title": "Infinix INBOOK",
-      "description": "Infinix Inbook X1 Ci3 10th 8GB 256GB 14 Win10 Grey – 1 Year Warranty",
-      "price": 1099,
-      "discountPercentage": 11.83,
-      "rating": 4.54,
-      "stock": 96,
-      "brand": "Infinix",
-      "category": "laptops",
-      "thumbnail": "https://i.dummyjson.com/data/products/9/thumbnail.jpg",
-      "images": [
-        "https://i.dummyjson.com/data/products/9/1.jpg",
-        "https://i.dummyjson.com/data/products/9/2.png",
-        "https://i.dummyjson.com/data/products/9/3.png",
-        "https://i.dummyjson.com/data/products/9/4.jpg",
-        "https://i.dummyjson.com/data/products/9/thumbnail.jpg"
+      "items": [
+        {
+          "title": "iPhone X",
+          "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+          "price": 899,
+          "discountPercentage": 17.94,
+          "rating": 4.44,
+          "stock": 34,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/2/1.jpg",
+            "https://i.dummyjson.com/data/products/2/2.jpg",
+            "https://i.dummyjson.com/data/products/2/3.jpg",
+            "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 13,
+          "id": 3
+        }
       ],
-      "quantity": 1,
-      "user": 12
+      "totalAmount": 899,
+      "totalItems": 1,
+      "user": {
+        "email": "abhinav@abhinav.com",
+        "password": "Ajay@1234",
+        "addresses": [
+          {
+            "name": "Ajay",
+            "email": "ajaykumar420.ak79@gmail.com",
+            "phone": "09992664018",
+            "street": "Vill. Garhi bala, near bindhroli",
+            "city": "Sonipat",
+            "state": "Haryana",
+            "pinCode": "131403"
+          }
+        ],
+        "id": 13
+      },
+      "PaymentMethod": "cash",
+      "selectedAddress": {
+        "name": "Ajay",
+        "email": "ajaykumar420.ak79@gmail.com",
+        "phone": "09992664018",
+        "street": "Vill. Garhi bala, near bindhroli",
+        "city": "Sonipat",
+        "state": "Haryana",
+        "pinCode": "131403"
+      },
+      "status": "pending",
+      "id": 3
+    },
+    {
+      "items": [
+        {
+          "title": "iPhone X",
+          "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+          "price": 899,
+          "discountPercentage": 17.94,
+          "rating": 4.44,
+          "stock": 34,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/2/1.jpg",
+            "https://i.dummyjson.com/data/products/2/2.jpg",
+            "https://i.dummyjson.com/data/products/2/3.jpg",
+            "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+          ],
+          "quantity": 2,
+          "user": 13,
+          "id": 3
+        },
+        {
+          "title": "MacBook Pro",
+          "description": "MacBook Pro 2021 with mini-LED display may launch between September, November",
+          "price": 1749,
+          "discountPercentage": 11.02,
+          "rating": 4.57,
+          "stock": 83,
+          "brand": "Apple",
+          "category": "laptops",
+          "thumbnail": "https://i.dummyjson.com/data/products/6/thumbnail.png",
+          "images": [
+            "https://i.dummyjson.com/data/products/6/1.png",
+            "https://i.dummyjson.com/data/products/6/2.jpg",
+            "https://i.dummyjson.com/data/products/6/3.png",
+            "https://i.dummyjson.com/data/products/6/4.jpg"
+          ],
+          "quantity": 1,
+          "user": 13,
+          "id": 5
+        }
+      ],
+      "totalAmount": 3547,
+      "totalItems": 3,
+      "user": {
+        "email": "abhinav@abhinav.com",
+        "password": "Ajay@1234",
+        "addresses": [
+          {
+            "name": "Ajay",
+            "email": "ajaykumar420.ak79@gmail.com",
+            "phone": "09992664018",
+            "street": "Vill. Garhi bala, near bindhroli",
+            "city": "Sonipat",
+            "state": "Haryana",
+            "pinCode": "131403"
+          }
+        ],
+        "id": 13
+      },
+      "PaymentMethod": "cash",
+      "selectedAddress": {
+        "name": "Ajay",
+        "email": "ajaykumar420.ak79@gmail.com",
+        "phone": "09992664018",
+        "street": "Vill. Garhi bala, near bindhroli",
+        "city": "Sonipat",
+        "state": "Haryana",
+        "pinCode": "131403"
+      },
+      "status": "pending",
+      "id": 4
     }
   ]
 }
