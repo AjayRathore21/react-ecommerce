@@ -2132,40 +2132,6 @@
       "quantity": 1,
       "user": 12,
       "id": 3
-    },
-    {
-      "title": "Samsung Universe 9",
-      "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
-      "price": 1249,
-      "discountPercentage": 15.46,
-      "rating": 4.09,
-      "stock": 36,
-      "brand": "Samsung",
-      "category": "smartphones",
-      "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
-      "images": [
-        "https://i.dummyjson.com/data/products/3/1.jpg"
-      ],
-      "quantity": 1,
-      "user": 13,
-      "id": 4
-    },
-    {
-      "title": "Samsung Universe 9",
-      "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
-      "price": 1249,
-      "discountPercentage": 15.46,
-      "rating": 4.09,
-      "stock": 36,
-      "brand": "Samsung",
-      "category": "smartphones",
-      "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
-      "images": [
-        "https://i.dummyjson.com/data/products/3/1.jpg"
-      ],
-      "quantity": 3,
-      "user": 13,
-      "id": 5
     }
   ],
   "orders": [
@@ -2404,6 +2370,92 @@
       },
       "status": "pending",
       "id": 4
+    },
+    {
+      "items": [
+        {
+          "title": "Samsung Universe 9",
+          "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
+          "price": 1249,
+          "discountPercentage": 15.46,
+          "rating": 4.09,
+          "stock": 36,
+          "brand": "Samsung",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/3/1.jpg"
+          ],
+          "quantity": 1,
+          "user": 13,
+          "id": 4
+        },
+        {
+          "title": "Samsung Universe 9",
+          "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
+          "price": 1249,
+          "discountPercentage": 15.46,
+          "rating": 4.09,
+          "stock": 36,
+          "brand": "Samsung",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/3/1.jpg"
+          ],
+          "quantity": 3,
+          "user": 13,
+          "id": 5
+        }
+      ],
+      "totalAmount": 4996,
+      "totalItems": 4,
+      "user": {
+        "email": "abhinav@abhinav.com",
+        "password": "Ajay@1234",
+        "addresses": [
+          {
+            "name": "Ajay Rathore",
+            "email": "ajaykumar420.ak79@gmail.com",
+            "phone": "09992664018",
+            "street": "Vill. Garhi bala, near bindhroli",
+            "city": "Sonipat",
+            "state": "Haryana",
+            "pinCode": "131403"
+          },
+          {
+            "name": "Ajay Rathore-2",
+            "email": "ajaykumar420.ak79@gmail.com",
+            "phone": "09992664018",
+            "street": "Vill. Garhi bala, near bindhroli",
+            "city": "Sonipat",
+            "state": "Haryana",
+            "pinCode": "131403"
+          }
+        ],
+        "id": 13,
+        "address": {
+          "name": "Ajay Rathore -2",
+          "email": "ajaykumar420.ak79@gmail.com",
+          "phone": "09992664018",
+          "street": "Vill. Garhi bala, near bindhroli",
+          "city": "Sonipat",
+          "state": "Haryana",
+          "pinCode": "131403"
+        }
+      },
+      "PaymentMethod": "cash",
+      "selectedAddress": {
+        "name": "Ajay Rathore",
+        "email": "ajaykumar420.ak79@gmail.com",
+        "phone": "09992664018",
+        "street": "Vill. Garhi bala, near bindhroli",
+        "city": "Sonipat",
+        "state": "Haryana",
+        "pinCode": "131403"
+      },
+      "status": "pending",
+      "id": 5
     }
   ]
 }

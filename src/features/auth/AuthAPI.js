@@ -35,3 +35,9 @@ export function checkUser(loginInfo) {
   });
 }
 
+export function signOut(userId) {
+  return new Promise(async (resolve) => {
+    // TODO: On server this will remove the session info of the user
+    resolve({ data: "success" });
+  });
+}

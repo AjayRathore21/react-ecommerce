@@ -73,7 +73,7 @@ export default function UserProfile() {
         >
           Add New Address
         </button>
-        {showAddAddressForm == true ? (
+        {showAddAddressForm === true ? (
           <form
             noValidate
             className="bg-white px-5 py-12 mt-12"
@@ -343,7 +343,7 @@ export default function UserProfile() {
         <p className="mt-0.5 text-sm text-gray-500">Your Address:</p>
         {user.addresses.map((address, index) => (
           <div>
-            {selectedEditIndex == index ? (
+            {selectedEditIndex === index ? (
               <form
                 noValidate
                 className="bg-white px-5 py-12 mt-12"
