@@ -2018,20 +2018,11 @@
         {
           "name": "Ajay",
           "email": "ajaykumar420.ak79@gmail.com",
-          "phone": "09992664018",
-          "street": "Vill. Garhi bala, near bindhroli",
           "city": "Sonipat",
           "state": "Haryana",
-          "pinCode": "131403"
-        },
-        {
-          "name": "Ajay",
-          "email": "ajaykumar420.ak79@gmail.com",
-          "phone": "09992664018",
+          "pinCode": "131404",
           "street": "Vill. Garhi bala, near bindhroli",
-          "city": "Sonipat",
-          "state": "Haryana",
-          "pinCode": "131403"
+          "phone": "09992664018"
         },
         {
           "name": "Ajay",
@@ -2049,7 +2040,16 @@
       "password": "Ajay@1234",
       "addresses": [
         {
-          "name": "Ajay",
+          "name": "Ajay Rathore",
+          "email": "ajaykumar420.ak79@gmail.com",
+          "phone": "09992664018",
+          "street": "Vill. Garhi bala, near bindhroli",
+          "city": "Sonipat",
+          "state": "Haryana",
+          "pinCode": "131403"
+        },
+        {
+          "name": "Ajay Rathore-2",
           "email": "ajaykumar420.ak79@gmail.com",
           "phone": "09992664018",
           "street": "Vill. Garhi bala, near bindhroli",
@@ -2058,7 +2058,16 @@
           "pinCode": "131403"
         }
       ],
-      "id": 13
+      "id": 13,
+      "address": {
+        "name": "Ajay Rathore -2",
+        "email": "ajaykumar420.ak79@gmail.com",
+        "phone": "09992664018",
+        "street": "Vill. Garhi bala, near bindhroli",
+        "city": "Sonipat",
+        "state": "Haryana",
+        "pinCode": "131403"
+      }
     }
   ],
   "cart": [
@@ -2102,6 +2111,61 @@
       ],
       "quantity": 1,
       "user": 1
+    },
+    {
+      "title": "OPPOF19",
+      "description": "OPPO F19 is officially announced on April 2021.",
+      "price": 280,
+      "discountPercentage": 17.91,
+      "rating": 4.3,
+      "stock": 123,
+      "brand": "OPPO",
+      "category": "smartphones",
+      "thumbnail": "https://i.dummyjson.com/data/products/4/thumbnail.jpg",
+      "images": [
+        "https://i.dummyjson.com/data/products/4/1.jpg",
+        "https://i.dummyjson.com/data/products/4/2.jpg",
+        "https://i.dummyjson.com/data/products/4/3.jpg",
+        "https://i.dummyjson.com/data/products/4/4.jpg",
+        "https://i.dummyjson.com/data/products/4/thumbnail.jpg"
+      ],
+      "quantity": 1,
+      "user": 12,
+      "id": 3
+    },
+    {
+      "title": "Samsung Universe 9",
+      "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
+      "price": 1249,
+      "discountPercentage": 15.46,
+      "rating": 4.09,
+      "stock": 36,
+      "brand": "Samsung",
+      "category": "smartphones",
+      "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
+      "images": [
+        "https://i.dummyjson.com/data/products/3/1.jpg"
+      ],
+      "quantity": 1,
+      "user": 13,
+      "id": 4
+    },
+    {
+      "title": "Samsung Universe 9",
+      "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
+      "price": 1249,
+      "discountPercentage": 15.46,
+      "rating": 4.09,
+      "stock": 36,
+      "brand": "Samsung",
+      "category": "smartphones",
+      "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
+      "images": [
+        "https://i.dummyjson.com/data/products/3/1.jpg"
+      ],
+      "quantity": 3,
+      "user": 13,
+      "id": 5
     }
   ],
   "orders": [
