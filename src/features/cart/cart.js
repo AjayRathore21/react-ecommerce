@@ -5,29 +5,29 @@ import { Bloodtype } from "@mui/icons-material";
 import { Link, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteFromCartAsync, selectItems, updateCartAsync } from "./cartSlice";
+import { discountedPrice } from "../../app/constants";
 
 export default function Cart() {
   const [open, setOpen] = useState(true);
   const items = useSelector(selectItems);
   const dispatch = useDispatch();
   const totalAmount = items.reduce(
-    (amount, item) => item.price * item.quantity + amount,
+    (amount, item) => discountedPrice(item) * item.quantity + amount,
     0
   );
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
   const handleQuantity = (e, item) => {
-    console.log(item,'inside   cart')
+    console.log(item, "inside   cart");
     dispatch(updateCartAsync({ ...item, quantity: +e.target.value })); // yhaa value string me aayegi to usko integer me convert kraa h
   };
   const handleRemove = (e, id) => {
-    console.log(id,'inside cart')
+    console.log(id, "inside cart");
     dispatch(deleteFromCartAsync(id)); // yhaa value string me aayegi to usko integer me convert kraa h
   };
 
   return (
-
     <>
-      {!items.length && <Navigate to='/' replace={true}></Navigate>}
+      {!items.length && <Navigate to="/" replace={true}></Navigate>}
       <div className="mx-auto bg-white pb-12 mt-12 max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mt-8 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl my-12 text-center font-bold tracking-tight text-gray-900">
@@ -51,7 +51,7 @@ export default function Cart() {
                         <h3>
                           <a href={product.href}>{product.title}</a>
                         </h3>
-                        <p className="ml-4">${product.price}</p>
+                        <p className="ml-4">${discountedPrice(product)}</p>
                       </div>
                       <p className="mt-1 text-sm text-gray-500">
                         {product.brand}
@@ -60,7 +60,10 @@ export default function Cart() {
                     <div className="flex flex-1 items-end justify-between text-sm">
                       <div className="text-gray-500">
                         <bold className="mr-2 font-bold">Qty</bold>{" "}
-                        <select onChange={(e) => handleQuantity(e, product)} value={product.quantity}>
+                        <select
+                          onChange={(e) => handleQuantity(e, product)}
+                          value={product.quantity}
+                        >
                           <option id="1">1</option>
                           <option id="2">2</option>
                           <option id="3">3</option>
@@ -72,7 +75,7 @@ export default function Cart() {
                       <div className="flex">
                         <button
                           type="button"
-                          onClick={e=>handleRemove(e,product.id)}
+                          onClick={(e) => handleRemove(e, product.id)}
                           className="font-medium text-indigo-600 hover:text-indigo-500"
                         >
                           Remove

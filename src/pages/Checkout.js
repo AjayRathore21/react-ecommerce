@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { useForm } from "react-hook-form";
-import { Link,useNavigate,Navigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -13,14 +13,18 @@ import {
   selectLoggedInUser,
   updateUserAsync,
 } from "../features/auth/AuthSlice";
-import { createOrderAsync,selectCurrentOrder } from "../features/order/orderSlice";
+import {
+  createOrderAsync,
+  selectCurrentOrder,
+} from "../features/order/orderSlice";
 import { selectUserInfo } from "../features/user/userSlice";
+import { discountedPrice } from "../app/constants";
 
 export default function Checkout() {
   const [open, setOpen] = useState(true);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [PaymentMethod, setPaymentMethod] = useState("cash");
-  const navigate  = useNavigate();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -32,10 +36,10 @@ export default function Checkout() {
   const user = useSelector(selectUserInfo);
   const dispatch = useDispatch();
   const items = useSelector(selectItems);
-  const currentOrder = useSelector(selectCurrentOrder)
+  const currentOrder = useSelector(selectCurrentOrder);
 
   const totalAmount = items.reduce(
-    (amount, item) => item.price * item.quantity + amount,
+    (amount, item) => discountedPrice(item) * item.quantity + amount,
     0
   );
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
@@ -67,13 +71,12 @@ export default function Checkout() {
         user,
         PaymentMethod,
         selectedAddress,
-        status:'pending'  // this status is change by the admin when the order deliver or cancel
+        status: "pending", // this status is change by the admin when the order deliver or cancel
       }; // items are those item which are present in the cart
 
       dispatch(createOrderAsync(order));
-      
+
       // navigate('/success-order')
-      
     } else {
       alert(
         !selectedAddress ? "Enter Delivary Address" : "Enter payment method"
@@ -88,11 +91,16 @@ export default function Checkout() {
   return (
     <>
       {!items.length && <Navigate to="/" replace={true}></Navigate>}
-      {currentOrder && <Navigate to={`/success-order/${currentOrder.id}`} replace={true}></Navigate>}
+      {currentOrder && (
+        <Navigate
+          to={`/success-order/${currentOrder.id}`}
+          replace={true}
+        ></Navigate>
+      )}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
           <div className="lg:col-span-3  mb-8">
-            <form 
+            <form
               noValidate
               className="bg-white px-5 py-12 mt-12"
               onSubmit={handleSubmit((data, e) => {
@@ -390,7 +398,9 @@ export default function Checkout() {
                               <h3>
                                 <a href={product.href}>{product.title}</a>
                               </h3>
-                              <p className="ml-4">${product.price}</p>
+                              <p className="ml-4">
+                                ${discountedPrice(product)}
+                              </p>
                             </div>
                             <p className="mt-1 text-sm text-gray-500">
                               {product.brand}
