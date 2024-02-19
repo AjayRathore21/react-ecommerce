@@ -9,7 +9,7 @@ import {
   selectBrands,
   fetchBrandsAsync,
   fetchCatoriesAsync,
-} from "../productListSlice";
+} from "../../product-lists/productListSlice";
 import { Link } from "react-router-dom";
 
 import { Fragment } from "react";
@@ -40,85 +40,20 @@ const subCategories = [
   { name: "Hip Bags", href: "#" },
   { name: "Laptop Sleeves", href: "#" },
 ];
-// const filters = [
-//   {
-//     id: "brand",
-//     name: "Brand",
-//     options: [
-//       { value: "Apple", label: "Apple", checked: false },
-//       { value: "Samsung", label: "Samsung", checked: false },
-//       { value: "OPPO", label: "OPPO", checked: false },
-//       { value: "Huawei", label: "Huawei", checked: false },
-//       {
-//         value: "Microsoft Surface",
-//         label: "Microsoft Surface",
-//         checked: false,
-//       },
-//       { value: "Infinix", label: "Infinix", checked: false },
-//       { value: "HP Pavilion", label: "HP Pavilion", checked: false },
-//       {
-//         value: "Impression of Acqua Di Gio",
-//         label: "Impression of Acqua Di Gio",
-//         checked: false,
-//       },
-//       { value: "Royal_Mirage", label: "Royal_Mirage", checked: false },
-//       {
-//         value: "Fog Scent Xpressio",
-//         label: "Fog Scent Xpressio",
-//         checked: false,
-//       },
-//       { value: "Al Munakh", label: "Al Munakh", checked: false },
-//       { value: "Lord - Al-Rehab", label: "Lord   Al Rehab", checked: false },
-//       { value: "L'Oreal Paris", label: "L'Oreal Paris", checked: false },
-//       { value: "Hemani Tea", label: "Hemani Tea", checked: false },
-//       { value: "Dermive", label: "Dermive", checked: false },
-//       { value: "ROREC White Rice", label: "ROREC White Rice", checked: false },
-//       { value: "Fair & Clear", label: "Fair & Clear", checked: false },
-//       { value: "Saaf & Khaas", label: "Saaf & Khaas", checked: false },
-//       { value: "Bake Parlor Big", label: "Bake Parlor Big", checked: false },
-//       {
-//         value: "Baking Food Items",
-//         label: "Baking Food Items",
-//         checked: false,
-//       },
-//       { value: "fauji", label: "fauji", checked: false },
-//       { value: "Dry Rose", label: "Dry Rose", checked: false },
-//       { value: "Boho Decor", label: "Boho Decor", checked: false },
-//       { value: "Flying Wooden", label: "Flying Wooden", checked: false },
-//       { value: "LED Lights", label: "LED Lights", checked: false },
-//       { value: "luxury palace", label: "luxury palace", checked: false },
-//       { value: "Golden", label: "Golden", checked: false },
-//     ],
-//   },
-//   {
-//     id: "category",
-//     name: "Category",
-//     options: [
-//       { value: "smartphones", label: "smartphones", checked: false },
-//       { value: "laptops", label: "laptops", checked: false },
-//       { value: "fragrances", label: "fragrances", checked: false },
-//       { value: "skincare", label: "skincare", checked: false },
-//       { value: "groceries", label: "groceries", checked: false },
-//       {
-//         value: "home-decoration",
-//         label: "home decoration",
-//         checked: false,
-//       },
-//     ],
-//   },
-// ];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ProductList() {
+export default function AdminProductList() {
   // const count = useSelector(selectCount);
-  // const dispatch = useDispatch();
+
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState({});
   const [page, setPage] = useState(1);
+
+  console.log("inside admin AdminProductList");
 
   const products = useSelector(selectAllProduct);
   const brands = useSelector(selectBrands);
@@ -127,8 +62,6 @@ export default function ProductList() {
   const totalItems = useSelector(selectTotalItems); // fetching total item from the store
 
   const dispatch = useDispatch();
-
-  console.log("inside normal ProductList");
 
   const filters = [
     {
@@ -178,8 +111,6 @@ export default function ProductList() {
     const pagination = { _page: page, _limit: ITEMS_PER_PAGE };
 
     dispatch(fetchProductByFiltersAsync({ filter, sort, pagination }));
-
-    //TODO: server will filter the deleted products
   }, [dispatch, filter, sort, page]);
 
   useEffect(() => {
@@ -284,6 +215,14 @@ export default function ProductList() {
 
               {/* Product grid */}
               <div className="lg:col-span-3">
+                <div>
+                  <Link
+                    to={"/admin/product-form"}
+                    className="rounded-md mx-10 my-3 bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  >
+                    Add New Product
+                  </Link>
+                </div>
                 <ProductGrid products={products}></ProductGrid>
               </div>
             </div>
@@ -610,45 +549,64 @@ function ProductGrid({ products }) {
 
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-2">
           {products.map((product) => (
-            <Link to={`/product-detail/${product.id}`}>
-              <div
-                key={product.id}
-                className="group relative border-solid border-2 p-2 "
-              >
-                <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60">
-                  <img
-                    src={product.thumbnail}
-                    alt={product.title}
-                    className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                  />
-                </div>
-                <div className="mt-4 flex justify-between">
-                  <div>
-                    <h3 className="text-sm text-gray-700">
-                      <a href={product.thumbnail}>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {product.title}
-                      </a>
-                    </h3>
-                    <p className="mt-1 text-sm text-gray-500">
-                      <StarIcon className="w-5 h-5 inline "></StarIcon>
-                      <span className="align-bottom"> {product.rating}</span>
-                    </p>
+            <div>
+              <Link to={`/product-detail/${product.id}`}>
+                <div
+                  key={product.id}
+                  className="group relative border-solid border-2 p-2 "
+                >
+                  <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60">
+                    <img
+                      src={product.thumbnail}
+                      alt={product.title}
+                      className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                    />
                   </div>
-                  <div>
-                    <p className="text-sm font-medium text-gray-900">
-                      $
-                      {Math.round(
-                        product.price * (1 - product.discountPercentage / 100)
-                      )}
-                    </p>
-                    <p className="text-sm font-medium line-through text-gray-400">
-                      ${product.price}
-                    </p>
+                  <div className="mt-4 flex justify-between">
+                    <div>
+                      <h3 className="text-sm text-gray-700">
+                        <a href={product.thumbnail}>
+                          <span
+                            aria-hidden="true"
+                            className="absolute inset-0"
+                          />
+                          {product.title}
+                        </a>
+                      </h3>
+                      <p className="mt-1 text-sm text-gray-500">
+                        <StarIcon className="w-5 h-5 inline "></StarIcon>
+                        <span className="align-bottom"> {product.rating}</span>
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-900">
+                        $
+                        {Math.round(
+                          product.price * (1 - product.discountPercentage / 100)
+                        )}
+                      </p>
+                      <p className="text-sm font-medium line-through text-gray-400">
+                        ${product.price}
+                      </p>
+                    </div>
                   </div>
+                {product.deleted && <div>
+                  <p className="text-sm text-red-700 font-serif">
+                    {" "}
+                    Deleted Product
+                  </p>
+                  </div>}
                 </div>
+              </Link>
+              <div className="my-6">
+                <Link
+                  to={`/admin/product-form/edit/${product.id}`}
+                  className="rounded-md my-4 bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Edit Product
+                </Link>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>

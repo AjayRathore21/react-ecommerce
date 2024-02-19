@@ -14,18 +14,47 @@ export function fetchProductById(id) {
   return new Promise(async (resolve) =>
     // TODO will write server url after some time
     {
-      const res = await fetch("http://localhost:8080/products/"+id);
+      const res = await fetch("http://localhost:8080/products/" + id);
       const data = await res.json();
       resolve({ data });
     }
   );
 }
 
+export function createProduct(product) {
+  return new Promise(async (resolve) => {
+    const response = await fetch("http://localhost:8080/products/", {
+      method: "POST",
+      body: JSON.stringify(product),
+      headers: { "content-type": "application/json" },
+    });
+    const data = await response.json();
+    resolve({ data });
+  });
+}
+
+export function updateProduct(update) {
+  return new Promise(async (resolve) => {
+    const response = await fetch(
+      "http://localhost:8080/products/" + update.id,
+      {
+        method: "PATCH",
+        body: JSON.stringify(update),
+        headers: { "content-type": "application/json" },
+      }
+    );
+    const data = await response.json();
+    // TODO: on server it will only return some info of user (not password)
+    resolve({ data });
+  });
+}
 
 export function fetchProductByFilters(filter, sort, pagination) {
   // filter object--> {'category':['smartphone','laptops']}
   // sort-->{_sort:'price',_order:'desc'}
   // pagination = {_sort:1,_limit=10}
+  // TODO : on server i will support multi value in filter in case of non- admin
+  //TODO server will filter the deleted products
 
   //TODO--> multiple category filter should implement
 
@@ -59,13 +88,12 @@ export function fetchProductByFilters(filter, sort, pagination) {
 
       const data = await res.json();
 
-      const totalItems = await res.headers.get('X-Total-Count')
+      const totalItems = await res.headers.get("X-Total-Count");
 
-      resolve({ data:{products:data,totalItems:+totalItems} });
+      resolve({ data: { products: data, totalItems: +totalItems } });
     }
   );
 }
-
 
 export function fetchCatories() {
   return new Promise(async (resolve) =>

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchAllProductByIdAsync,
   selectProductById,
-} from "../productListSlice";
+} from "../../product-lists/productListSlice";
 import { useParams } from "react-router-dom";
 import { selectLoggedInUser } from "../../auth/AuthSlice";
 import { addToCart } from "../../cart/cartApi";
@@ -28,38 +28,36 @@ const sizes = [
   { name: "3XL", inStock: true },
 ];
 
-const highlights  = [
+const highlights = [
   "Hand cut and sewn locally",
   "Dyed with our proprietary colors",
   "Pre-washed & pre-shrunk",
   "Ultra-soft 100% cotton",
-]
-
-
+];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 // TODO : Loading UI
-export default function ProductDetail() {
+export default function AdminProductDetail() {
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [selectedSize, setSelectedSize] = useState(sizes[2]);
   const product = useSelector(selectProductById);
   const dispatch = useDispatch();
-  const user = useSelector(selectLoggedInUser)
+  const user = useSelector(selectLoggedInUser);
   const params = useParams();
   // TODO : in server data. we will add colors, size, highlights.
   useEffect(() => {
     dispatch(fetchAllProductByIdAsync(params.id));
   }, [dispatch, params.id]);
 
-const handleCart = (e)=>{
-  e.preventDefault();
-  const newItem = {...product,quantity:1,user:user.id};
-  delete newItem['id'];
-  dispatch(addToCartAsync(newItem))
-}
+  const handleCart = (e) => {
+    e.preventDefault();
+    const newItem = { ...product, quantity: 1, user: user.id };
+    delete newItem["id"];
+    dispatch(addToCartAsync(newItem));
+  };
 
   return (
     <div className="bg-white">
@@ -302,7 +300,7 @@ const handleCart = (e)=>{
 
                 <button
                   type="submit"
-                  onClick={e=>handleCart(e)}
+                  onClick={(e) => handleCart(e)}
                   className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Add to Cart
@@ -330,10 +328,10 @@ const handleCart = (e)=>{
                 <div className="mt-4">
                   <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
                     {highlights.map((highlight) => (
-                        <li key={highlight} className="text-gray-400">
-                          <span className="text-gray-600">{highlight}</span>
-                        </li>
-                      ))}
+                      <li key={highlight} className="text-gray-400">
+                        <span className="text-gray-600">{highlight}</span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>
