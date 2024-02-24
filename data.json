@@ -1,4 +1,4 @@
-{
+ {
   "products": [
     {
       "id": 1,
@@ -2052,6 +2052,15 @@
           "city": "Sonipat",
           "state": "Haryana",
           "pinCode": "131403"
+        },
+        {
+          "name": "Ajay Rathore-3",
+          "email": "ajaykumar420.ak79@gmail.com",
+          "phone": "09992664018",
+          "street": "Vill. Garhi bala, near bindhroli",
+          "city": "Sonipat",
+          "state": "Haryana",
+          "pinCode": "131403"
         }
       ]
     },
@@ -2132,27 +2141,6 @@
       ],
       "quantity": 1,
       "user": 1
-    },
-    {
-      "title": "iPhone X",
-      "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
-      "price": 899,
-      "discountPercentage": 17.94,
-      "rating": 4.44,
-      "stock": 34,
-      "brand": "Apple",
-      "category": "smartphones",
-      "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
-      "images": [
-        "https://i.dummyjson.com/data/products/2/1.jpg",
-        "https://i.dummyjson.com/data/products/2/2.jpg",
-        "https://i.dummyjson.com/data/products/2/3.jpg",
-        "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
-      ],
-      "productId": 2,
-      "quantity": 1,
-      "user": 12,
-      "id": 3
     }
   ],
   "orders": [
@@ -2696,6 +2684,146 @@
       },
       "status": "pending",
       "id": 7
+    },
+    {
+      "items": [
+        {
+          "title": "FREE FIRE T Shirt",
+          "description": "quality and professional print - It doesn't just look high quality, it is high quality.",
+          "price": 10,
+          "discountPercentage": 14.72,
+          "rating": 4.52,
+          "stock": 128,
+          "brand": "FREE FIRE",
+          "category": "mens-shirts",
+          "thumbnail": "https://i.dummyjson.com/data/products/52/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/52/1.png",
+            "https://i.dummyjson.com/data/products/52/2.png",
+            "https://i.dummyjson.com/data/products/52/3.jpg",
+            "https://i.dummyjson.com/data/products/52/4.jpg",
+            "https://i.dummyjson.com/data/products/52/thumbnail.jpg"
+          ],
+          "productId": 52,
+          "quantity": 1,
+          "user": 13,
+          "id": 4
+        }
+      ],
+      "totalAmount": 9,
+      "totalItems": 1,
+      "user": {
+        "email": "abhinav@abhinav.com",
+        "password": "Ajay@1234",
+        "role": "admin",
+        "addresses": [
+          {
+            "name": "Ajay Rathore",
+            "email": "ajaykumar420.ak79@gmail.com",
+            "phone": "09992664018",
+            "street": "Vill. Garhi bala, near bindhroli",
+            "city": "Sonipat",
+            "state": "Haryana",
+            "pinCode": "131403"
+          },
+          {
+            "name": "Ajay Rathore-2",
+            "email": "ajaykumar420.ak79@gmail.com",
+            "phone": "09992664018",
+            "street": "Vill. Garhi bala, near bindhroli",
+            "city": "Sonipat",
+            "state": "Haryana",
+            "pinCode": "131403"
+          }
+        ],
+        "id": 13,
+        "address": {
+          "name": "Ajay Rathore -2",
+          "email": "ajaykumar420.ak79@gmail.com",
+          "phone": "09992664018",
+          "street": "Vill. Garhi bala, near bindhroli",
+          "city": "Sonipat",
+          "state": "Haryana",
+          "pinCode": "131403"
+        }
+      },
+      "PaymentMethod": "cash",
+      "selectedAddress": {
+        "name": "Ajay Rathore",
+        "email": "ajaykumar420.ak79@gmail.com",
+        "phone": "09992664018",
+        "street": "Vill. Garhi bala, near bindhroli",
+        "city": "Sonipat",
+        "state": "Haryana",
+        "pinCode": "131403"
+      },
+      "status": "pending",
+      "id": 8
+    },
+    {
+      "items": [
+        {
+          "title": "iPhone X",
+          "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+          "price": 899,
+          "discountPercentage": 17.94,
+          "rating": 4.44,
+          "stock": 34,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/2/1.jpg",
+            "https://i.dummyjson.com/data/products/2/2.jpg",
+            "https://i.dummyjson.com/data/products/2/3.jpg",
+            "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+          ],
+          "productId": 2,
+          "quantity": 1,
+          "user": 12,
+          "id": 3
+        }
+      ],
+      "totalAmount": 738,
+      "totalItems": 1,
+      "user": {
+        "email": "contact@programmx.in",
+        "password": "Ajay@1234",
+        "role": "user",
+        "id": 12,
+        "addresses": [
+          {
+            "name": "Ajay",
+            "email": "ajaykumar420.ak79@gmail.com",
+            "city": "Sonipat",
+            "state": "Haryana",
+            "pinCode": "131404",
+            "street": "Vill. Garhi bala, near bindhroli",
+            "phone": "09992664018"
+          },
+          {
+            "name": "Ajay",
+            "email": "ajaykumar420.ak79@gmail.com",
+            "phone": "09992664018",
+            "street": "Vill. Garhi bala, near bindhroli",
+            "city": "Sonipat",
+            "state": "Haryana",
+            "pinCode": "131403"
+          }
+        ]
+      },
+      "PaymentMethod": "cash",
+      "selectedAddress": {
+        "name": "Ajay",
+        "email": "ajaykumar420.ak79@gmail.com",
+        "city": "Sonipat",
+        "state": "Haryana",
+        "pinCode": "131404",
+        "street": "Vill. Garhi bala, near bindhroli",
+        "phone": "09992664018"
+      },
+      "status": "pending",
+      "id": 9
     }
   ]
 }
