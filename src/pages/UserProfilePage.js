@@ -1,12 +1,15 @@
-import Navbar from "../features/navbar/Navbar";
-import UserProfile from "../features/user/components/UserProfile";
-export default function UserProfilePage() {
+import NavBar from '../features/navbar/Navbar';
+import UserProfile from '../features/user/components/UserProfile';
+
+function UserProfilePage() {
   return (
-    <>
-      <Navbar>
-        <h1 className="mx-auto text-lg font-bold">Hii There </h1>
+    <div>
+      <NavBar>
+        <h1 className='mx-auto text-2xl'>My Profile</h1>
         <UserProfile></UserProfile>
-      </Navbar>
-    </>
+      </NavBar>
+    </div>
   );
 }
+
+export default UserProfilePage;

@@ -1,43 +1,43 @@
-// A mock function to mimic making an async request for data
+
 export function createUser(userData) {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:8080/users", {
-      method: "POST",
+    const response = await fetch('http://localhost:8080/auth/signup', {
+      method: 'POST',
       body: JSON.stringify(userData),
-      headers: { "content-type": "application/json" },
+      headers: { 'content-type': 'application/json' },
     });
-
     const data = await response.json();
-    console.log(data, "inside authapi");
-    // TODO: On server this will return only relevant info (not send the password!)
+    // TODO: on server it will only return some info of user (not password)
     resolve({ data });
   });
 }
 
 export function checkUser(loginInfo) {
   return new Promise(async (resolve, reject) => {
-    const email = loginInfo.email;
-    const password = loginInfo.password;
-    const response = await fetch("http://localhost:8080/users?email=" + email);
-
-    const data = await response.json();
-
-    if (data.length) {
-      if (password === data[0].password) {
-        console.log(data, "inside authApi");
-        resolve({ data: data[0] });
+    try {
+      const response = await fetch('http://localhost:8080/auth/login', {
+        method: 'POST',
+        body: JSON.stringify(loginInfo),
+        headers: { 'content-type': 'application/json' },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        resolve({ data });
       } else {
-        reject({ message: "Wrong Password!" });
+        const error = await response.json();
+        reject(error);
       }
-    } else {
-      reject({ message: "user not Found!" });
+    } catch (error) {
+      reject( error );
     }
+
+    // TODO: on server it will only return some info of user (not password)
   });
 }
 
 export function signOut(userId) {
   return new Promise(async (resolve) => {
-    // TODO: On server this will remove the session info of the user
-    resolve({ data: "success" });
+    // TODO: on server we will remove user session info
+    resolve({ data: 'success' });
   });
 }

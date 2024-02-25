@@ -1,95 +1,68 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState, Fragment, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
-  fetchAllProductsAsync,
-  selectAllProduct,
-  fetchProductByFiltersAsync,
-  selectTotalItems,
-  selectCategories,
-  selectBrands,
   fetchBrandsAsync,
-  fetchCatoriesAsync,
-} from "../../product-lists/productListSlice";
-import { Link } from "react-router-dom";
-
-import { Fragment } from "react";
-import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+  fetchCategoriesAsync,
+  fetchProductsByFiltersAsync,
+  selectAllProducts,
+  selectBrands,
+  selectCategories,
+  selectTotalItems,
+} from '../../product/productSlice';
+import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react';
+import { XMarkIcon } from '@heroicons/react/24/outline';
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  StarIcon,
+} from '@heroicons/react/20/solid';
+import { Link } from 'react-router-dom';
 import {
   ChevronDownIcon,
   FunnelIcon,
   MinusIcon,
   PlusIcon,
   Squares2X2Icon,
-  StarIcon,
-} from "@heroicons/react/20/solid";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
-// import { Link } from "@mui/material";
-import { ITEMS_PER_PAGE, discountedPrice } from "../../../app/constants";
+} from '@heroicons/react/20/solid';
+import { ITEMS_PER_PAGE, discountedPrice } from '../../../app/constants';
 
 const sortOptions = [
-  { name: "Best Rating", sort: "rating", order: "desc", current: false },
-
-  { name: "Price: Low to High", sort: "price", order: "asc", current: false },
-  { name: "Price: High to Low", sort: "price", order: "desc", current: false },
-];
-const subCategories = [
-  { name: "Totes", href: "#" },
-  { name: "Backpacks", href: "#" },
-  { name: "Travel Bags", href: "#" },
-  { name: "Hip Bags", href: "#" },
-  { name: "Laptop Sleeves", href: "#" },
+  { name: 'Best Rating', sort: 'rating', order: 'desc', current: false },
+  { name: 'Price: Low to High', sort: 'price', order: 'asc', current: false },
+  { name: 'Price: High to Low', sort: 'price', order: 'desc', current: false },
 ];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function AdminProductList() {
-  // const count = useSelector(selectCount);
-
-  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const [filter, setFilter] = useState({});
-  const [sort, setSort] = useState({});
-  const [page, setPage] = useState(1);
-
-  console.log("inside admin AdminProductList");
-
-  const products = useSelector(selectAllProduct);
+  const dispatch = useDispatch();
+  const products = useSelector(selectAllProducts);
   const brands = useSelector(selectBrands);
   const categories = useSelector(selectCategories);
-
-  const totalItems = useSelector(selectTotalItems); // fetching total item from the store
-
-  const dispatch = useDispatch();
-
+  const totalItems = useSelector(selectTotalItems);
   const filters = [
     {
-      id: "brand",
-      name: "Brand",
-      options: brands,
+      id: 'category',
+      name: 'Category',
+      options: categories,
     },
     {
-      id: "category",
-      name: "Category",
-      options: categories,
+      id: 'brand',
+      name: 'Brands',
+      options: brands,
     },
   ];
 
-  const handleSort = (e, option) => {
-    const sort = { _sort: option.sort, _order: option.order };
-    setSort(sort);
-  };
-
-  const handlePage = (e, page) => {
-    console.log({ page });
-
-    setPage(page);
-  };
-
+  const [filter, setFilter] = useState({});
+  const [sort, setSort] = useState({});
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [page, setPage] = useState(1);
   const handleFilter = (e, section, option) => {
-    const newFilter = { ...filter }; // TODO: on server is will support multiple category search
-
+    console.log(e.target.checked);
+    const newFilter = { ...filter };
+    // TODO : on server it will support multiple categories
     if (e.target.checked) {
       if (newFilter[section.id]) {
         newFilter[section.id].push(option.value);
@@ -97,20 +70,30 @@ export default function AdminProductList() {
         newFilter[section.id] = [option.value];
       }
     } else {
-      const index = newFilter[section.id].findIndex((e) => e === option.value);
-      delete newFilter[section.id].splice(index, 1);
+      const index = newFilter[section.id].findIndex(
+        (el) => el === option.value
+      );
+      newFilter[section.id].splice(index, 1);
     }
-    // const newFilter = { ...filter, [section.id]: option.value };
+    console.log({ newFilter });
 
     setFilter(newFilter);
+  };
 
-    // console.log(section.id, option.value);
+  const handleSort = (e, option) => {
+    const sort = { _sort: option.sort, _order: option.order };
+    console.log({ sort });
+    setSort(sort);
+  };
+
+  const handlePage = (page) => {
+    console.log({ page });
+    setPage(page);
   };
 
   useEffect(() => {
     const pagination = { _page: page, _limit: ITEMS_PER_PAGE };
-
-    dispatch(fetchProductByFiltersAsync({ filter, sort, pagination }));
+    dispatch(fetchProductsByFiltersAsync({ filter, sort, pagination, admin:true }));
   }, [dispatch, filter, sort, page]);
 
   useEffect(() => {
@@ -118,17 +101,17 @@ export default function AdminProductList() {
   }, [totalItems, sort]);
 
   useEffect(() => {
-    dispatch(fetchCatoriesAsync());
     dispatch(fetchBrandsAsync());
+    dispatch(fetchCategoriesAsync());
   }, []);
 
   return (
     <div className="bg-white">
       <div>
         <MobileFilter
+          handleFilter={handleFilter}
           mobileFiltersOpen={mobileFiltersOpen}
           setMobileFiltersOpen={setMobileFiltersOpen}
-          handleFilter={handleFilter}
           filters={filters}
         ></MobileFilter>
 
@@ -168,10 +151,10 @@ export default function AdminProductList() {
                               onClick={(e) => handleSort(e, option)}
                               className={classNames(
                                 option.current
-                                  ? "font-medium text-gray-900"
-                                  : "text-gray-500",
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm"
+                                  ? 'font-medium text-gray-900'
+                                  : 'text-gray-500',
+                                active ? 'bg-gray-100' : '',
+                                'block px-4 py-2 text-sm'
                               )}
                             >
                               {option.name}
@@ -212,27 +195,29 @@ export default function AdminProductList() {
                 handleFilter={handleFilter}
                 filters={filters}
               ></DesktopFilter>
-
               {/* Product grid */}
+
               <div className="lg:col-span-3">
                 <div>
                   <Link
-                    to={"/admin/product-form"}
-                    className="rounded-md mx-10 my-3 bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    to="/admin/product-form"
+                    className="rounded-md mx-10 my-5 bg-green-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
                     Add New Product
                   </Link>
                 </div>
                 <ProductGrid products={products}></ProductGrid>
               </div>
+              {/* Product grid end */}
             </div>
           </section>
+
+          {/* section of product and filters ends */}
           <Pagination
             page={page}
             setPage={setPage}
             handlePage={handlePage}
             totalItems={totalItems}
-            filters={filters}
           ></Pagination>
         </main>
       </div>
@@ -290,17 +275,6 @@ function MobileFilter({
 
               {/* Filters */}
               <form className="mt-4 border-t border-gray-200">
-                <h3 className="sr-only">Categories</h3>
-                <ul role="list" className="px-2 py-3 font-medium text-gray-900">
-                  {subCategories.map((category) => (
-                    <li key={category.name}>
-                      <a href={category.href} className="block px-2 py-3">
-                        {category.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-
                 {filters.map((section) => (
                   <Disclosure
                     as="div"
@@ -340,11 +314,11 @@ function MobileFilter({
                                   id={`filter-mobile-${section.id}-${optionIdx}`}
                                   name={`${section.id}[]`}
                                   defaultValue={option.value}
+                                  type="checkbox"
+                                  defaultChecked={option.checked}
                                   onChange={(e) =>
                                     handleFilter(e, section, option)
                                   }
-                                  type="checkbox"
-                                  defaultChecked={option.checked}
                                   className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                 />
                                 <label
@@ -373,18 +347,6 @@ function MobileFilter({
 function DesktopFilter({ handleFilter, filters }) {
   return (
     <form className="hidden lg:block">
-      <h3 className="sr-only">Categories</h3>
-      <ul
-        role="list"
-        className="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900"
-      >
-        {subCategories.map((category) => (
-          <li key={category.name}>
-            <a href={category.href}>{category.name}</a>
-          </li>
-        ))}
-      </ul>
-
       {filters.map((section) => (
         <Disclosure
           as="div"
@@ -439,30 +401,19 @@ function DesktopFilter({ handleFilter, filters }) {
 }
 
 function Pagination({ page, setPage, handlePage, totalItems }) {
+  const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
   return (
     <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
       <div className="flex flex-1 justify-between sm:hidden">
         <div
-          onClick={(e) => {
-            if (page > 0) {
-              handlePage(e, page - 1);
-            } else {
-              return;
-            }
-          }}
-          className="relative cursor-pointer inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          onClick={(e) => handlePage(page > 1 ? page - 1 : page)}
+          className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
         >
           Previous
         </div>
         <div
-          onClick={(e) => {
-            if (page < Math.ceil(totalItems / ITEMS_PER_PAGE)) {
-              handlePage(e, page + 1);
-            } else {
-              return;
-            }
-          }}
-          className="relative ml-3 cursor-pointer inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          onClick={(e) => handlePage(page < totalPages ? page + 1 : page)}
+          className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
         >
           Next
         </div>
@@ -470,16 +421,16 @@ function Pagination({ page, setPage, handlePage, totalItems }) {
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-gray-700">
-            Showing{" "}
+            Showing{' '}
             <span className="font-medium">
               {(page - 1) * ITEMS_PER_PAGE + 1}
-            </span>{" "}
-            to{" "}
+            </span>{' '}
+            to{' '}
             <span className="font-medium">
               {page * ITEMS_PER_PAGE > totalItems
                 ? totalItems
                 : page * ITEMS_PER_PAGE}
-            </span>{" "}
+            </span>{' '}
             of <span className="font-medium">{totalItems}</span> results
           </p>
         </div>
@@ -489,13 +440,7 @@ function Pagination({ page, setPage, handlePage, totalItems }) {
             aria-label="Pagination"
           >
             <div
-              onClick={(e) => {
-                if (page > 1) {
-                  handlePage(e, page - 1);
-                } else {
-                  return;
-                }
-              }}
+              onClick={(e) => handlePage(page > 1 ? page - 1 : page)}
               className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
             >
               <span className="sr-only">Previous</span>
@@ -503,30 +448,23 @@ function Pagination({ page, setPage, handlePage, totalItems }) {
             </div>
             {/* Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" */}
 
-            {Array.from({ length: Math.ceil(totalItems / ITEMS_PER_PAGE) }).map(
-              (p, index) => (
-                <div
-                  onClick={(e) => handlePage(e, index + 1)}
-                  aria-current="page"
-                  className={`relative z-10 inline-flex items-center ${
-                    index + 1 === page
-                      ? "bg-indigo-500 text-white"
-                      : " text-gray-400"
-                  }  px-4 py-2 text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer`}
-                >
-                  {index + 1}
-                </div>
-              )
-            )}
+            {Array.from({ length: totalPages }).map((el, index) => (
+              <div
+                key={index}
+                onClick={(e) => handlePage(index + 1)}
+                aria-current="page"
+                className={`relative cursor-pointer z-10 inline-flex items-center ${
+                  index + 1 === page
+                    ? 'bg-indigo-600 text-white'
+                    : 'text-gray-400'
+                } px-4 py-2 text-sm font-semibold  focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+              >
+                {index + 1}
+              </div>
+            ))}
 
             <div
-              onClick={(e) => {
-                if (page < Math.ceil(totalItems / ITEMS_PER_PAGE)) {
-                  handlePage(e, page + 1);
-                } else {
-                  return;
-                }
-              }}
+              onClick={(e) => handlePage(page < totalPages ? page + 1 : page)}
               className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
             >
               <span className="sr-only">Next</span>
@@ -543,19 +481,12 @@ function ProductGrid({ products }) {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-0 sm:px-6 sm:py-0 lg:max-w-7xl lg:px-8">
-        <h2 className="text-2xl font-bold tracking-tight text-gray-900">
-          Customers also purchased
-        </h2>
-
-        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-2">
+        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
           {products.map((product) => (
-            <div>
-              <Link to={`/product-detail/${product.id}`}>
-                <div
-                  key={product.id}
-                  className="group relative border-solid border-2 p-2 "
-                >
-                  <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60">
+            <div key={product.id}>
+              <Link to={`/product-detail/${product.id}`} >
+                <div className="group relative border-solid border-2 p-2 border-gray-200">
+                  <div className="min-h-60 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60">
                     <img
                       src={product.thumbnail}
                       alt={product.title}
@@ -565,41 +496,45 @@ function ProductGrid({ products }) {
                   <div className="mt-4 flex justify-between">
                     <div>
                       <h3 className="text-sm text-gray-700">
-                        <a href={product.thumbnail}>
+                        <div href={product.thumbnail}>
                           <span
                             aria-hidden="true"
                             className="absolute inset-0"
                           />
                           {product.title}
-                        </a>
+                        </div>
                       </h3>
                       <p className="mt-1 text-sm text-gray-500">
-                        <StarIcon className="w-5 h-5 inline "></StarIcon>
-                        <span className="align-bottom"> {product.rating}</span>
+                        <StarIcon className="w-6 h-6 inline"></StarIcon>
+                        <span className=" align-bottom">{product.rating}</span>
                       </p>
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-gray-900">
+                      <p className="text-sm block font-medium text-gray-900">
                         $
                         {discountedPrice(product)}
                       </p>
-                      <p className="text-sm font-medium line-through text-gray-400">
+                      <p className="text-sm block line-through font-medium text-gray-400">
                         ${product.price}
                       </p>
                     </div>
                   </div>
-                {product.deleted && <div>
-                  <p className="text-sm text-red-700 font-serif">
-                    {" "}
-                    Deleted Product
-                  </p>
-                  </div>}
+                  {product.deleted && (
+                    <div>
+                      <p className="text-sm text-red-400">product deleted</p>
+                    </div>
+                  )}
+                  {product.stock<=0 && (
+                  <div>
+                    <p className="text-sm text-red-400">out of stock</p>
+                  </div>
+                )}
                 </div>
               </Link>
-              <div className="my-6">
+              <div className="mt-5">
                 <Link
                   to={`/admin/product-form/edit/${product.id}`}
-                  className="rounded-md my-4 bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Edit Product
                 </Link>

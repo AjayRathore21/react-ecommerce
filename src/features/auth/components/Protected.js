@@ -1,16 +1,13 @@
-import { useSelector } from "react-redux";
-import { selectLoggedInUser } from "../AuthSlice";
-import { Navigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+import { selectLoggedInUser } from '../authSlice';
 
 function Protected({ children }) {
   const user = useSelector(selectLoggedInUser);
 
   if (!user) {
-    return <Navigate replace={true} to="/login"></Navigate>;
+    return <Navigate to="/login" replace={true}></Navigate>;
   }
-
-  console.log("inside normal protected!");
-
   return children;
 }
 
