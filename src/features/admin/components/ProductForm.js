@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import {
   clearSelectedProduct,
   createProductAsync,
@@ -7,12 +7,12 @@ import {
   selectCategories,
   selectProductById,
   updateProductAsync,
-} from '../../product/productSlice';
-import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import Modal from '../../common/Modal';
-import { useAlert } from 'react-alert';
+} from "../../product/productSlice";
+import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import Modal from "../../common/Modal";
+import { useAlert } from "react-alert";
 
 function ProductForm() {
   const {
@@ -31,20 +31,35 @@ function ProductForm() {
   const alert = useAlert();
 
   const colors = [
-    { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400',id:'white' },
-    { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400', id:'gray' },
-    { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900',id:'black' },
+    {
+      name: "White",
+      class: "bg-white",
+      selectedClass: "ring-gray-400",
+      id: "white",
+    },
+    {
+      name: "Gray",
+      class: "bg-gray-200",
+      selectedClass: "ring-gray-400",
+      id: "gray",
+    },
+    {
+      name: "Black",
+      class: "bg-gray-900",
+      selectedClass: "ring-gray-900",
+      id: "black",
+    },
   ];
 
   const sizes = [
-    { name: 'XXS', inStock: true, id:'xxs' },
-    { name: 'XS', inStock: true, id:'xs' },
-    { name: 'S', inStock: true, id:'s' },
-    { name: 'M', inStock: true, id:'m' },
-    { name: 'L', inStock: true , id:'l'},
-    { name: 'XL', inStock: true, id:'xl' },
-    { name: '2XL', inStock: true , id:'2xl'},
-    { name: '3XL', inStock: true , id:'3xl'},
+    { name: "XXS", inStock: true, id: "xxs" },
+    { name: "XS", inStock: true, id: "xs" },
+    { name: "S", inStock: true, id: "s" },
+    { name: "M", inStock: true, id: "m" },
+    { name: "L", inStock: true, id: "l" },
+    { name: "XL", inStock: true, id: "xl" },
+    { name: "2XL", inStock: true, id: "2xl" },
+    { name: "3XL", inStock: true, id: "3xl" },
   ];
 
   useEffect(() => {
@@ -57,25 +72,30 @@ function ProductForm() {
 
   useEffect(() => {
     if (selectedProduct && params.id) {
-      setValue('title', selectedProduct.title);
-      setValue('description', selectedProduct.description);
-      setValue('price', selectedProduct.price);
-      setValue('discountPercentage', selectedProduct.discountPercentage);
-      setValue('thumbnail', selectedProduct.thumbnail);
-      setValue('stock', selectedProduct.stock);
-      setValue('image1', selectedProduct.images[0]);
-      setValue('image2', selectedProduct.images[1]);
-      setValue('image3', selectedProduct.images[2]);
-      setValue('brand', selectedProduct.brand);
-      setValue('category', selectedProduct.category);
-      setValue('highlight1', selectedProduct.highlights[0]);
-      setValue('highlight2', selectedProduct.highlights[1]);
-      setValue('highlight3', selectedProduct.highlights[2]);
-      setValue('highlight4', selectedProduct.highlights[3]);
-      setValue('sizes', selectedProduct.sizes.map(size=>size.id));
-      setValue('colors', selectedProduct.colors.map(color=>color.id));
+      setValue("title", selectedProduct.title);
+      setValue("description", selectedProduct.description);
+      setValue("price", selectedProduct.price);
+      setValue("discountPercentage", selectedProduct.discountPercentage);
+      setValue("thumbnail", selectedProduct.thumbnail);
+      setValue("stock", selectedProduct.stock);
+      setValue("image1", selectedProduct.images[0]);
+      setValue("image2", selectedProduct.images[1]);
+      setValue("image3", selectedProduct.images[2]);
+      setValue("brand", selectedProduct.brand);
+      setValue("category", selectedProduct.category);
+      setValue("highlight1", selectedProduct.highlights[0]);
+      setValue("highlight2", selectedProduct.highlights[1]);
+      setValue("highlight3", selectedProduct.highlights[2]);
+      setValue("highlight4", selectedProduct.highlights[3]);
+      setValue(
+        "sizes",
+        selectedProduct.sizes.map((size) => size.id)
+      );
+      setValue(
+        "colors",
+        selectedProduct.colors.map((color) => color.id)
+      );
     }
-
   }, [selectedProduct, params.id, setValue]);
 
   const handleDelete = () => {
@@ -93,23 +113,31 @@ function ProductForm() {
           const product = { ...data };
           product.images = [
             product.image1,
-            product.image2, 
+            product.image2,
             product.image3,
             product.thumbnail,
           ];
           product.highlights = [
             product.highlight1,
-            product.highlight2, 
+            product.highlight2,
             product.highlight3,
             product.highlight4,
           ];
           product.rating = 0;
-          product.colors = product.colors.map(color=>colors.find(clr=>clr.id===color));
-          product.sizes = product.sizes.map(size=>sizes.find(sz=>sz.id===size));
+          if (product.colors) {
+            product.colors = product.colors.map((color) =>
+              colors.find((clr) => clr.id === color)
+            );
+          }
+          if (product.sizes) {
+            product.sizes = product.sizes.map((size) =>
+              sizes.find((sz) => sz.id === size)
+            );
+          }
 
-          delete product['image1'];
-          delete product['image2'];
-          delete product['image3'];
+          delete product["image1"];
+          delete product["image2"];
+          delete product["image3"];
           product.price = +product.price;
           product.stock = +product.stock;
           product.discountPercentage = +product.discountPercentage;
@@ -118,12 +146,12 @@ function ProductForm() {
             product.id = params.id;
             product.rating = selectedProduct.rating || 0;
             dispatch(updateProductAsync(product));
-            alert.success('Product Updated');
+            alert.success("Product Updated");
 
             reset();
           } else {
             dispatch(createProductAsync(product));
-            alert.success('Product Created');
+            alert.success("Product Created");
             // TODO: these alerts should check if API failed
             reset();
           }
@@ -153,8 +181,8 @@ function ProductForm() {
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 ">
                     <input
                       type="text"
-                      {...register('title', {
-                        required: 'name is required',
+                      {...register("title", {
+                        required: "name is required",
                       })}
                       id="title"
                       className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
@@ -173,12 +201,12 @@ function ProductForm() {
                 <div className="mt-2">
                   <textarea
                     id="description"
-                    {...register('description', {
-                      required: 'description is required',
+                    {...register("description", {
+                      required: "description is required",
                     })}
                     rows={3}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    defaultValue={''}
+                    defaultValue={""}
                   />
                 </div>
                 <p className="mt-3 text-sm leading-6 text-gray-600">
@@ -195,8 +223,8 @@ function ProductForm() {
                 </label>
                 <div className="mt-2">
                   <select
-                    {...register('brand', {
-                      required: 'brand is required',
+                    {...register("brand", {
+                      required: "brand is required",
                     })}
                   >
                     <option value="">--choose brand--</option>
@@ -221,11 +249,10 @@ function ProductForm() {
                     <>
                       <input
                         type="checkbox"
-                        {...register('colors', {
-                        })}
+                        {...register("colors", {})}
                         key={color.id}
                         value={color.id}
-                      />{' '}
+                      />{" "}
                       {color.name}
                     </>
                   ))}
@@ -244,11 +271,10 @@ function ProductForm() {
                     <>
                       <input
                         type="checkbox"
-                        {...register('sizes', {
-                        })}
+                        {...register("sizes", {})}
                         key={size.id}
                         value={size.id}
-                      />{' '}
+                      />{" "}
                       {size.name}
                     </>
                   ))}
@@ -264,8 +290,8 @@ function ProductForm() {
                 </label>
                 <div className="mt-2">
                   <select
-                    {...register('category', {
-                      required: 'category is required',
+                    {...register("category", {
+                      required: "category is required",
                     })}
                   >
                     <option value="">--choose category--</option>
@@ -289,8 +315,8 @@ function ProductForm() {
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 ">
                     <input
                       type="number"
-                      {...register('price', {
-                        required: 'price is required',
+                      {...register("price", {
+                        required: "price is required",
                         min: 1,
                         max: 10000,
                       })}
@@ -312,8 +338,8 @@ function ProductForm() {
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 ">
                     <input
                       type="number"
-                      {...register('discountPercentage', {
-                        required: 'discountPercentage is required',
+                      {...register("discountPercentage", {
+                        required: "discountPercentage is required",
                         min: 0,
                         max: 100,
                       })}
@@ -335,8 +361,8 @@ function ProductForm() {
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 ">
                     <input
                       type="number"
-                      {...register('stock', {
-                        required: 'stock is required',
+                      {...register("stock", {
+                        required: "stock is required",
                         min: 0,
                       })}
                       id="stock"
@@ -357,8 +383,8 @@ function ProductForm() {
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 ">
                     <input
                       type="text"
-                      {...register('thumbnail', {
-                        required: 'thumbnail is required',
+                      {...register("thumbnail", {
+                        required: "thumbnail is required",
                       })}
                       id="thumbnail"
                       className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
@@ -378,8 +404,8 @@ function ProductForm() {
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 ">
                     <input
                       type="text"
-                      {...register('image1', {
-                        required: 'image1 is required',
+                      {...register("image1", {
+                        required: "image1 is required",
                       })}
                       id="image1"
                       className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
@@ -399,8 +425,8 @@ function ProductForm() {
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 ">
                     <input
                       type="text"
-                      {...register('image2', {
-                        required: 'image is required',
+                      {...register("image2", {
+                        required: "image is required",
                       })}
                       id="image2"
                       className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
@@ -420,8 +446,8 @@ function ProductForm() {
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 ">
                     <input
                       type="text"
-                      {...register('image3', {
-                        required: 'image is required',
+                      {...register("image3", {
+                        required: "image is required",
                       })}
                       id="image3"
                       className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
@@ -441,8 +467,7 @@ function ProductForm() {
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 ">
                     <input
                       type="text"
-                      {...register('highlight1', {
-                      })}
+                      {...register("highlight1", {})}
                       id="highlight1"
                       className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                     />
@@ -460,8 +485,7 @@ function ProductForm() {
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 ">
                     <input
                       type="text"
-                      {...register('highlight2', {
-                      })}
+                      {...register("highlight2", {})}
                       id="highlight2"
                       className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                     />
@@ -479,8 +503,7 @@ function ProductForm() {
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 ">
                     <input
                       type="text"
-                      {...register('highlight3', {
-                      })}
+                      {...register("highlight3", {})}
                       id="highlight3"
                       className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                     />
@@ -498,8 +521,7 @@ function ProductForm() {
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 ">
                     <input
                       type="text"
-                      {...register('highlight4', {
-                      })}
+                      {...register("highlight4", {})}
                       id="highlight4"
                       className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                     />
@@ -511,7 +533,7 @@ function ProductForm() {
 
           <div className="border-b border-gray-900/10 pb-12">
             <h2 className="text-base font-semibold leading-7 text-gray-900">
-              Extra{' '}
+              Extra{" "}
             </h2>
 
             <div className="mt-10 space-y-10">

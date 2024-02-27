@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ITEMS_PER_PAGE, discountedPrice } from "../../../app/constants";
+import { ITEMS_PER_PAGE } from "../../../app/constants";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchAllOrdersAsync,
@@ -191,9 +191,8 @@ function AdminOrders() {
                             />
                           </div>
                           <span>
-                            {console.log(order, "inside loop")}
                             {order.title} - #{order.quantity} - $
-                            {discountedPrice(order)}
+                            {order.discountPrice}
                           </span>
                         </div>
                       </td>
