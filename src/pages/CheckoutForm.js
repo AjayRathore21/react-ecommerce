@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import {
   PaymentElement,
   useStripe,
-  useElements
+  useElements,
 } from "@stripe/react-stripe-js";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import { selectCurrentOrder } from "../features/order/orderSlice";
 
 export default function CheckoutForm() {
@@ -61,10 +61,10 @@ export default function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: `https://mern-ecommerce-lyart.vercel.app/order-success/${currentOrder.id}`,
+        return_url: `https://mern-bharatbazaar.vercel.app/
+        order-success/${currentOrder.id}`,
       },
     });
-
     // This point will only be reached if there is an immediate error when
     // confirming the payment. Otherwise, your customer will be redirected to
     // your `return_url`. For some payment methods like iDEAL, your customer will
@@ -80,8 +80,8 @@ export default function CheckoutForm() {
   };
 
   const paymentElementOptions = {
-    layout: "tabs"
-  }
+    layout: "tabs",
+  };
 
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
